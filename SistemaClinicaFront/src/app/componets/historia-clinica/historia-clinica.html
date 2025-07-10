@@ -1,0 +1,1072 @@
+<div class="d-flex justify-content-end align-items-center bg-light px-4 py-2 border-bottom shadow-sm"
+  style="position: sticky; top: 0; z-index: 1000;">
+  <span class="me-3 fw-semibold text-primary">
+    👋 Bienvenido, {{ nombreUsuarioLogueado }}
+  </span>
+
+  <!-- Botón de regresar al menú -->
+  <button class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1 me-2" (click)="volverAlMenu()">
+    <i class="bi bi-arrow-left-circle"></i> Menú
+  </button>
+
+  <!-- Botón de cerrar sesión -->
+  <button class="btn btn-outline-danger btn-sm d-flex align-items-center gap-1" (click)="logout()">
+    <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+  </button>
+</div>
+
+
+<div class="container">
+
+  <h2 class="mb-4 text-center text-primary fw-bold">
+    Historia Clínica General <br>
+    <small class="text-muted fs-6">Consultorio Odontológico Escolar – IESIT</small>
+  </h2>
+
+
+  <ul class="nav nav-tabs justify-content-center flex-wrap shadow-sm rounded bg-light p-2" id="historiaClinicaTabs"
+    role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="datos-tab" data-bs-toggle="tab" data-bs-target="#datos" type="button"
+        role="tab">
+        🧑 Datos del Paciente
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="heredo-tab" data-bs-toggle="tab" data-bs-target="#heredo" type="button" role="tab">
+        🧬 Antecedentes patológicos heredo familiares
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="personales-tab" data-bs-toggle="tab" data-bs-target="#personales" type="button"
+        role="tab">
+        🩺 Antecedentes personales patológicos
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="personalesnopat-tab" data-bs-toggle="tab" data-bs-target="#personalesnopat"
+        type="button" role="tab">
+        🙎Antecedentes personales no patologicos
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="vitales-tab" data-bs-toggle="tab" data-bs-target="#vitales" type="button" role="tab">
+        ❤️ Signos Vitales
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="exploracion-tab" data-bs-toggle="tab" data-bs-target="#exploracion" type="button"
+        role="tab">
+        🧠 Cabeza y Cuello
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="estomatognatico-tab" data-bs-toggle="tab" data-bs-target="#estomatognatico"
+        type="button" role="tab">
+        👄 Estomatognático
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="tejidos-tab" data-bs-toggle="tab" data-bs-target="#tejidos" type="button" role="tab">
+        🧫 Tejidos Blandos
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="tutor-tab" data-bs-toggle="tab" data-bs-target="#tutor" type="button" role="tab">
+        👥 Datos del Tutor
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="diagnostico-tab" data-bs-toggle="tab" data-bs-target="#diagnostico" type="button"
+        role="tab">
+        📝 Diagnóstico y Tratamiento
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="evolucion-tab" data-bs-toggle="tab" data-bs-target="#evolucion" type="button"
+        role="tab">
+        📈Evolución del paciente
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="autorizacion-tab" data-bs-toggle="tab" data-bs-target="#autorizacion" type="button"
+        role="tab">
+        ✅ Autorización
+      </button>
+    </li>
+  </ul>
+
+  <!--Datos del paciente -->
+  <form class="tab-content mt-3 ">
+    <div class="tab-pane fade show active" id="datos" role="tabpanel">
+      <form id="formDatosPaciente" class="bg-white shadow-sm rounded p-4">
+        <div class="row g-3">
+
+          <div class="col-md-8">
+            <label for="nombrePaciente" class="form-label">Nombre completo del paciente</label>
+            <input [(ngModel)]="nombrePaciente" type="text" id="nombrePaciente" class="form-control"
+              name="nombrePaciente">
+          </div>
+
+          <div class="col-md-4">
+            <label for="curp" class="form-label">CURP</label>
+            <input [(ngModel)]="curp" type="text" id="curp" class="form-control" name="curp">
+          </div>
+
+          <div class="col-md-4">
+            <label for="sexo" class="form-label">Sexo</label>
+            <select id="sexo" class="form-select" [(ngModel)]="sexo" name="sexo">
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+            </select>
+          </div>
+
+
+          <div class="col-md-2">
+            <label for="edad" class="form-label">Edad</label>
+            <input name="edad" type="number" id="edad" [(ngModel)]="edad" class="form-control">
+          </div>
+
+          <div class="col-md-6">
+            <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+            <input name="fechaNacimiento" type="date" id="fechaNacimiento" [(ngModel)]="fechaNacimiento"
+              class="form-control">
+          </div>
+        </div>
+
+        <div class="row g-3 mt-2">
+          <div class="col-md-12">
+            <label for="domicilio" class="form-label">Domicilio completo</label>
+            <input name="domicilio" type="text" id="domicilio" class="form-control" [(ngModel)]="domicilio">
+          </div>
+        </div>
+
+        <div class="row g-3 mt-2">
+          <div class="col-md-4">
+            <label for="telefonoCasa" class="form-label">Teléfono de casa/trabajo</label>
+            <input type="text" id="telefonoCasa" name="telefonoCasa" [(ngModel)]="telefonoCasa" class="form-control">
+          </div>
+
+          <div class="col-md-4">
+            <label for="telefonoCelular" class="form-label">Teléfono celular</label>
+            <input type="text" id="telefonoCelular" name="telefonoCelular" [(ngModel)]="telefonoCelular"
+              class="form-control">
+          </div>
+
+          <div class="col-md-4">
+            <label for="religion" class="form-label">Religión</label>
+            <input type="text" id="religion" name="religion" [(ngModel)]="religion" class="form-control">
+          </div>
+        </div>
+
+        <div class="row g-3 mt-2">
+          <div class="col-md-4">
+            <label for="ocupacion" class="form-label">Ocupación</label>
+            <input type="text" id="ocupacion" name="ocupacion" [(ngModel)]="ocupacion" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label for="escolaridad" class="form-label">Escolaridad</label>
+            <input type="text" id="escolaridad" name="escolaridad" [(ngModel)]="escolaridad" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label for="estadoCivil" class="form-label">Estado civil</label>
+            <input type="text" id="estadoCivil" name="estadoCivil" [(ngModel)]="estadoCivil" class="form-control">
+          </div>
+        </div>
+
+        <div class="row g-3 mt-2">
+          <div class="col-md-6">
+            <label for="derechohabiente" class="form-label">¿Es derechohabiente de alguna institución?</label>
+            <select id="derechohabiente" name="derechohabiente" [(ngModel)]="derechohabiente" class="form-select">
+              <option>Sí</option>
+              <option>No</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="medicoFamiliar" class="form-label">Nombre del médico familiar</label>
+            <input type="text" id="medicoFamiliar" name="medicoFamiliar" [(ngModel)]="medicoFamiliar"
+              class="form-control">
+          </div>
+        </div>
+
+        <div class="row g-3 mt-2">
+          <div class="col-md-6">
+            <label for="numeroMedico" class="form-label">Teléfono del médico</label>
+            <input type="text" id="numeroMedico" name="numeroMedico" [(ngModel)]="numeroMedico" class="form-control">
+          </div>
+          <div class="col-md-12">
+            <label for="ultimaConsulta" class="form-label">Fecha y motivo de la última consulta</label>
+            <textarea type="text" id="ultimaConsulta" name="ultimaConsulta" [(ngModel)]="ultimaConsulta"
+              class="form-control input-lg"></textarea>
+          </div>
+
+        </div>
+        <div class="text-end mt-4">
+          <button type="submit" class="btn btn-primary" (click)="addDatosPaciente()">
+            Guardar avances
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Antecedentes patologicos heredofamiliares -->
+
+    <div class="tab-pane fade" id="heredo" role="tabpanel">
+      <form class="tab-content mt-3">
+        <div class="tab-pane fade show active" id="heredo" role="tabpanel">
+
+          <div class="form-section mb-3">
+            <p><strong>Nota:</strong> Especificar familiares en línea directa.</p>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-4 mb-3" *ngFor="let antecedente of antecedentesHeredofamiliaresList; let i = index">
+
+              <label>{{ antecedente.descripcionAntecedentes }}</label>
+
+              <select class="form-select" [ngClass]="{ 'is-invalid': antecedente.respuesta === '' }"
+                [(ngModel)]="antecedente.respuesta" name="respuesta{{i}}" required>
+                <option value="">Seleccione...</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+              </select>
+
+              <div *ngIf="antecedente.respuesta === ''" class="invalid-feedback d-block">
+                Debe seleccionar una respuesta.
+              </div>
+
+              <input type="text" class="form-control mt-1" placeholder="Detalle" [(ngModel)]="antecedente.detalle"
+                name="detalle{{i}}">
+
+            </div>
+          </div>
+          <div class="text-end mt-4">
+            <button type="submit" class="btn btn-primary" (click)="addAntecedentesHeredofamiliares()">
+              Guardar avances
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+    <!-- Antecedentes patologicos personales -->
+
+    <div class="tab-pane fade" id="personales" role="tabpanel">
+      <form class="tab-content mt-3">
+        <div class="tab-pane fade show active" id="heredo" role="tabpanel">
+
+          <div class="form-section mb-1">
+            <p><strong>Nota:</strong> Especificar.</p>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-4 mb-3" *ngFor="let antecedentesP of antecedentesPersonales; let i = index">
+              <label>{{ antecedentesP.descripcionAntecedentes }}</label>
+              <select class="form-select" [ngClass]="{ 'is-invalid': antecedentesP.respuesta === '' }"
+                [(ngModel)]="antecedentesP.respuesta" name="respuesta{{i}}" required>
+                <option value="">Seleccione...</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+              </select>
+              <div *ngIf="antecedentesP.respuesta === ''" class="invalid-feedback d-block">
+                Debe seleccionar una respuesta.
+              </div>
+              <input type="text" class="form-control mt-1" placeholder="Detalle" [(ngModel)]="antecedentesP.detalle"
+                name="detalle{{i}}">
+            </div>
+          </div>
+          <div class="text-end mt-4">
+            <button type="submit" class="btn btn-primary" (click)="addAntecedentesPersonales()">
+              Guardar avances
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+    <!--antecedentes personales no patologicos -->
+    <div class="tab-pane fade" id="personalesnopat" role="tabpanel">
+      <form class="tab-content mt-3">
+        <div class="row g-3 gy-4">
+          <div class="col-md-4">
+            <label>¿Con que freciencia se lava los dientes?</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label for="axuliares">¿Utuliza auxiliares de higiene bucal?</label>
+            <select id="auxiliares" class="form-select">
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>¿Cuales utiliza?</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <label>Grupo Sanguineo</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <label>Fator Rh</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label>¿Tiene Cartilla de vacunación?</label>
+            <select id="cartilla" class="form-select">
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>¿Tiene el esquema Completo?</label>
+            <select id="esquema" class="form-select">
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label>¿Cuál falta?</label>
+            <input type="text" class="form-control">
+          </div>
+
+          <div class="col-md-3">
+            <label>Antecedentes alergicos</label>
+            <select id="antecedentesAlergicos" class="form-select">
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>¿Cuál?</label>
+            <input type="text" class="form-control">
+          </div>
+
+           <div class="col-md-3">
+            <label>Antibioticos</label>
+            <input type="text" class="form-control">
+          </div>
+          
+          <div class="col-md-3">
+            <label>Analgésicos</label>
+            <input type="text" class="form-control">
+          </div>
+           <div class="col-md-3">
+            <label>Anestésicos</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label>Alimentos</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label>Otras Alergias</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label></label>
+          </div>
+          <div class="col-md-3">
+            <label>Adicciones</label>
+            <select id="adicciones" class="form-select">
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>Tabaco</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label>Alcohol</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label>Otras adicciones</label>
+            <input type="text" class="form-control">
+          </div>
+
+          <div class="col-md-3">
+            <label>¿Ha sido hospitalizado?</label>
+            <select id="hospitalizacion" class="form-select">
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label>Fecha</label>
+            <input type="Date" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Motivo</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label>Padecimiento Actual</label>
+            <input type="text" class="form-control">
+          </div>
+
+
+          <div class="col-md-3">
+            <label>¿Ha sido anestesiado?</label>
+            <select id="anestesiado" class="form-select">
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>¿Ha recibido transfusión?</label>
+            <select id="transfusion" class="form-select">
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>¿Tatuajes o perforaciones?</label>
+            <select id="tatuajesperforaciones" class="form-select">
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>¿Intervensiones quirurgicas?</label>
+            <select id="quirurgicas" class="form-select">
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>¿Consume algun medicamento?</label>
+            <select id="medicamento" class="form-select">
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label>¿Discapacidades?</label>
+            <select id="discapacidades" class="form-select">
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label>¿Embarazo?</label>
+            <select id="Embarazo" class="form-select">
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>¿Que parte del cuerpo?</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+    <!--SignosVitales -->
+    <div class="tab-pane fade" id="vitales" role="tabpanel">
+      <div class="row g-3">
+        <div class="col-md-4"><label>Temperatura (°C):</label><input type="text" class="form-control"></div>
+        <div class="col-md-4"><label>Frecuencia Respiratoria:</label><input type="text" class="form-control"></div>
+        <div class="col-md-4"><label>Tensión Arterial:</label><input type="text" class="form-control"></div>
+      </div>
+      <div class="row g-3 mt-2">
+        <div class="col-md-4"><label>Frecuencia Cardíaca:</label><input type="text" class="form-control"></div>
+        <div class="col-md-4"><label>Peso (kg):</label><input type="text" class="form-control"></div>
+        <div class="col-md-4"><label>Talla (cm):</label><input type="text" class="form-control"></div>
+      </div>
+    </div>
+
+
+    <!-- Exploracion cabeza-cjello -->
+
+    <div class="tab-pane fade" id="exploracion" role="tabpanel">
+      <form id="formExploracion" class="bg-white shadow-sm rounded p-4">
+        <h5 class="text-primary fw-bold mb-3">Exploración de Cabeza y Cuello</h5>
+
+        <!-- Cabeza -->
+        <div class="mb-4">
+          <h6 class="titulo-seccion">Cabeza</h6>
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="exostosis" name="exostosis">
+                <label class="form-check-label fw-semibold" for="exostosis">
+                  Exostosis
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="endotosis" name="endotosis">
+                <label class="form-check-label fw-semibold" for="endotosis">
+                  Endotosis
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Sección Cráneo -->
+        <div class="mb-4">
+          <h6 class="titulo-seccion">Cráneo</h6>
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="dolicocefalico" name="dolicocefalico">
+                <label class="form-check-label fw-semibold" for="dolicocefalico">
+                  Dolicocefálico
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="mesocefalico" name="mesocefalico">
+                <label class="form-check-label fw-semibold" for="mesocefalico">
+                  Mesocefálico
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="branquicefalico" name="branquicefalico">
+                <label class="form-check-label fw-semibold" for="branquicefalico">
+                  Braquicefálico
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cara -->
+        <div class="mb-4">
+          <h6 class="titulo-seccion2">Cara</h6>
+          <p class="titulo-seccion3">Asimetrías:</p>
+          <div class="row g-3 mb-3">
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="asimetriaTransversal" name="asimetriaTransversal">
+                <label class="form-check-label fw-semibold" for="asimetriaTransversal">
+                  Transversales
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="asimetriaLongitudinal" name="asimetriaLongitudinal">
+                <label class="form-check-label fw-semibold" for="asimetriaLongitudinal">
+                  Longitudinales
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Perfil -->
+          <h6 class="titulo-seccion">Perfil</h6>
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="concavo" name="concavo">
+                <label class="form-check-label fw-semibold" for="concavo">
+                  Cóncavo
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="convexo" name="convexo">
+                <label class="form-check-label fw-semibold" for="convexo">
+                  Convexo
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="recto" name="recto">
+                <label class="form-check-label fw-semibold" for="recto">
+                  Recto
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <h6 class="titulo-seccion">Piel</h6>
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="normal" name="normal">
+                <label class="form-check-label fw-semibold" for="normal">
+                  Normal
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="palida" name="palida">
+                <label class="form-check-label fw-semibold" for="palida">
+                  Pálida
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="cianotica" name="cianotica">
+                <label class="form-check-label fw-semibold" for="cianotica">
+                  Cianótica
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="enrojecida" name="enrojecida">
+                <label class="form-check-label fw-semibold" for="enrojecida">
+                  Enrojecida
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Sección Músculos -->
+        <div class="mb-4">
+          <h6 class="titulo-seccion">Musculos</h6>
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="hipotonicos" name="hipotonicos">
+                <label class="form-check-label fw-semibold" for="hipotonicos">
+                  Hipotónicos
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="hipertonicos" name="hipertonicos">
+                <label class="form-check-label fw-semibold" for="hipertonicos">
+                  Hipertónicos
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="espasticos" name="espasticos">
+                <label class="form-check-label fw-semibold" for="espasticos">
+                  Espásticos
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección Cuello -->
+        <div class="mb-4">
+          <h6 class="titulo-seccion">Cuello</h6>
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+                <input class="form-check-input" type="checkbox" id="cadenaGanglionar" name="cadenaGanglionar">
+                <label class="form-check-label fw-semibold" for="cadenaGanglionar">
+                  ¿Se palpa cadena ganglionar?
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Exploración del aparato estomatognático -->
+    <div class="tab-pane fade" id="estomatognatico" role="tabpanel">
+      <div class="mb-4">
+        <h5 class="text-primary fw-bold mb-3 border-bottom pb-2">
+          Exploración del aparato estomatognático
+        </h5>
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+              <input type="checkbox" class="form-check-input" id="ruidos" name="ruidos">
+              <label class="form-check-label fw-semibold" for="ruidos">
+                ¿Presenta ruidos?
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+              <input type="checkbox" class="form-check-input" id="lateralidad" name="lateralidad">
+              <label class="form-check-label fw-semibold" for="lateralidad">
+                Lateralidad
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+              <input type="checkbox" class="form-check-input" id="apertura" name="apertura">
+              <label class="form-check-label fw-semibold" for="apertura">
+                Apertura
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+              <input type="checkbox" class="form-check-input" id="chasquidos" name="chasquidos">
+              <label class="form-check-label fw-semibold" for="chasquidos">
+                ¿Chasquidos?
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+              <input type="checkbox" class="form-check-input" id="crepitacion" name="crepitacion">
+              <label class="form-check-label fw-semibold" for="crepitacion">
+                ¿Crepitación?
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+              <input type="checkbox" class="form-check-input" id="dificultadApertura" name="dificultadApertura">
+              <label class="form-check-label fw-semibold" for="dificultadApertura">
+                ¿Dificultad para abrir la boca?
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+              <input type="checkbox" class="form-check-input" id="dolorApertura" name="dolorApertura">
+              <label class="form-check-label fw-semibold" for="dolorApertura">
+                ¿Dolor a la abertura o movimiento de lateralidad?
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+              <input type="checkbox" class="form-check-input" id="fatigaMuscular" name="fatigaMuscular">
+              <label class="form-check-label fw-semibold" for="fatigaMuscular">
+                ¿Fatiga o dolor muscular?
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+              <input type="checkbox" class="form-check-input" id="disminucionApertura" name="disminucionApertura">
+              <label class="form-check-label fw-semibold" for="disminucionApertura">
+                ¿Disminución de la abertura?
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="form-check p-3 border rounded bg-light shadow-sm h-100">
+              <input type="checkbox" class="form-check-input" id="desviacionCierre" name="desviacionCierre">
+              <label class="form-check-label fw-semibold" for="desviacionCierre">
+                ¿Desviación a la abertura cierre?
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tejidos Blandos -->
+    <div class="tab-pane fade" id="tejidos" role="tabpanel">
+      <div class="mb-4">
+        <h5 class="text-primary fw-bold mb-3 border-bottom pb-2">
+          Tejidos Blandos
+        </h5>
+        <p class="form-text mb-4">
+          Describa: lesión elemental, número de lesiones, forma, tamaño, color, superficie, base, consistencia,
+          sintomatología, etiología, evolución, tratamiento recibido, cuadrante de ubicación.
+        </p>
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="ganglios">Ganglios</label>
+              <textarea class="form-control" id="ganglios" name="ganglios" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="glandulasSalivales">Glándulas salivales</label>
+              <textarea class="form-control" id="glandulasSalivales" name="glandulasSalivales" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="labioExterno">Labio externo</label>
+              <textarea type="text" class="form-control" id="labioExterno" name="labioExterno" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="bordeBermellon">Borde bermellón</label>
+              <textarea type="text" class="form-control" id="bordeBermellon" name="bordeBermellon" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="labioInterno">Labio interno</label>
+              <textarea type="text" class="form-control" id="labioInterno" name="labioInterno" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="comisuras">Comisuras</label>
+              <textarea type="text" class="form-control" id="comisuras" name="comisuras" placeholder="Descripción..."
+                rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="carrillos">Carrillos</label>
+              <textarea type="text" class="form-control" id="carrillos" name="carrillos" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="fondoSaco">Fondo de saco</label>
+              <textarea type="text" class="form-control" id="fondoSaco" name="fondoSaco" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="frenillos">Frenillos</label>
+              <textarea type="text" class="form-control" id="frenillos" name="frenillos" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="lenguaMedio">Lengua tercio medio</label>
+              <textarea type="text" class="form-control" id="lenguaMedio" name="lenguaMedio" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="paladarDuro">Paladar duro</label>
+              <textarea type="text" class="form-control" id="paladarDuro" name="paladarDuro" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="paladarBlando">Paladar blando</label>
+              <textarea type="text" class="form-control" id="paladarBlando" name="paladarBlando" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="istmo">Istmo bucofarínge</label>
+              <textarea type="text" class="form-control" id="istmo" name="istmo" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="lenguaDorso">Lengua dorso</label>
+              <textarea type="text" class="form-control" id="lenguaDorso" name="lenguaDorso" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="lenguaBordes">Lengua bordes</label>
+              <textarea type="text" class="form-control" id="lenguaBordes" name="lenguaBordes" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="lenguaVentral">Lengua ventral</label>
+              <textarea type="text" class="form-control" id="lenguaVentral" name="lenguaVentral" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="pisoBoca">Piso de la boca</label>
+              <textarea type="text" class="form-control" id="pisoBoca" name="pisoBoca" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="dientes">Dientes</label>
+              <textarea type="text" class="form-control" id="dientes" name="dientes" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="mucosa">Mucosa del borde alveolar</label>
+              <textarea type="text" class="form-control" id="mucosa" name="mucosa" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+              <label class="fw-semibold mb-1" for="encia">Encía</label>
+              <textarea type="text" class="form-control" id="encia" name="encia" rows="3"
+                placeholder="Descripción..."></textarea>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Tutor Responsable -->
+    <div class="tab-pane fade" id="tutor" role="tabpanel">
+      <div class="mb-6">
+        <h5 class="text-primary fw-bold mb-3 border-bottom pb-2">Tutor Responsable</h5>
+        <div class="row g-3">
+          <div class="col-12 col-md-9">
+            <label for="nombreTutor" class="fw-semibold mb-1">Nombre del tutor</label>
+            <input type="text" class="form-control" id="nombreTutor" name="nombreTutor"
+              placeholder="Escriba el nombre completo del tutor">
+          </div>
+
+          <div class="col-12 col-md-3">
+            <label for="edadTutor" class="fw-semibold mb-1">Edad</label>
+            <input type="number" class="form-control" id="edadTutor" name="edadTutor" placeholder="Edad del tutor">
+          </div>
+
+          <div class="col-12">
+            <label for="domicilioTutor" class="fw-semibold mb-1">Domicilio completo</label>
+            <input type="text" class="form-control" id="domicilioTutor" name="domicilioTutor">
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label for="telefonoCasa" class="fw-semibold mb-1">Teléfono de casa o trabajo</label>
+            <input type="tel" class="form-control" id="telefonoCasa" name="telefonoCasa" placeholder="">
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label for="telefonoCelular" class="fw-semibold mb-1">Teléfono celular</label>
+            <input type="tel" class="form-control" id="telefonoCelular" name="telefonoCelular" placeholder="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- Diagnóstico y Tratamiento -->
+    <div class="tab-pane fade" id="diagnostico" role="tabpanel">
+      <div class="form-section">
+        <div class="form-group">
+          <label for="interpretacionRx">Interpretación RX:</label>
+          <textarea id="interpretacionRx" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="diagnostico">Diagnóstico:</label>
+          <textarea id="diagnostico" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="resumenTratamiento">Resumen del Tratamiento:</label>
+          <textarea id="resumenTratamiento" class="form-control" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Evolución del paciente -->
+    <div class="tab-pane fade p-3" id="evolucion" role="tabpanel">
+
+      <div class="row mb-3 justify-content-center">
+        <div class="col-md-4">
+          <label for="fecha" class="form-label fw-semibold">Fecha</label>
+          <input type="date" class="form-control">
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="evolucionTexto" class="form-label fw-semibold">Evolución del paciente</label>
+        <textarea id="evolucionTexto" class="form-control" rows="9"></textarea>
+      </div>
+    </div>
+
+
+    <!-- Contenido del tab Autorización -->
+    <div class="tab-pane fade" id="autorizacion" role="tabpanel" aria-labelledby="autorizacion-tab">
+      <div class="authorization-box">
+        <p class="mb-4">
+          Por la presente autorizo a <input type="text" class="form-control d-inline w-auto"
+            placeholder="Nombre del alumno" /> y/o asociados a realizar el tratamiento informado en la presente
+          HISTORIA CLÍNICA. He conversado con el profesional sobre la naturaleza y el propósito del tratamiento,
+          sobre
+          la posibilidad de complicaciones, riesgos y posibles métodos alternativos. Autorizo a proveer los
+          servicios
+          adicionales que considere razonables, incluyendo la administración de anestésicos, prácticas de Rx y otros
+          métodos de diagnóstico.
+        </p>
+        <p class="mb-4">
+          Si el paciente fuera menor de edad, la firma al pie es del padre, madre o tutor responsable.
+        </p>
+        <div class="text-center mb-3">
+          <strong>AUTORIZO</strong>
+        </div>
+        <div class="signature-box d-flex justify-content-center mb-3">
+          <canvas id="signatureCanvas" width="500" height="200"></canvas>
+        </div>
+        <div class="text-center mt-2 mb-3">
+          <label for="nombreFirma" class="form-label">Nombre completo</label>
+          <input type="text" class="form-control w-50 mx-auto" id="nombreFirma" placeholder="Ej. Juan Pérez">
+        </div>
+        <div class="d-flex justify-content-center gap-2">
+          <button id="clearCanvas" class="btn btn-secondary" type="button">Limpiar Firma</button>
+          <button id="submitForm" class="btn btn-primary" type="button">Enviar Historia Clínica</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      © 2025 Consultorio Escolar IESIT. Todos los derechos reservados.
+    </footer>

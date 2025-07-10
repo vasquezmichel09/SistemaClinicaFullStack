@@ -1,35 +1,44 @@
-
 package com.Clinica.SistemaClinicaBack.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
-
 
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
 
-@Id
-private String matricula;
-private String nombreUsuario;
-@Column( unique= true)
-private String usuario;
-private String contrasena;
-private String periodo;
+    @Id
+    private String matricula;
+    private String nombreUsuario;
+    @Column(unique = true)
+    private String usuario;
+    private String contrasena;
+    private String periodo;
+    private String roles;
+
 
     public Usuario() {
     }
 
-    public Usuario(String matricula, String nombreUsuario, String usuario, String contrasena, String periodo) {
+    public Usuario(String matricula, String nombreUsuario, String usuario, String contrasena, String periodo, String roles) {
         this.matricula = matricula;
         this.nombreUsuario = nombreUsuario;
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.periodo = periodo;
+        this.roles = roles;
     }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
 
     public String getMatricula() {
         return matricula;

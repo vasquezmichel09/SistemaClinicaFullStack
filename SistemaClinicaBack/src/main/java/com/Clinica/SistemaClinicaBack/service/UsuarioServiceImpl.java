@@ -1,54 +1,51 @@
-
 package com.Clinica.SistemaClinicaBack.service;
 
 import com.Clinica.SistemaClinicaBack.entity.Usuario;
-import com.Clinica.SistemaClinicaBack.exception.ResourceNotFoundException;
 import com.Clinica.SistemaClinicaBack.repository.UsuarioRepository;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.util.List;
+
 @Service
-class UsuarioServiceImpl implements UsuarioService{
+public class UsuarioServiceImpl implements UsuarioService {
 
-    private final UsuarioRepository usuariorepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-    public UsuarioServiceImpl(UsuarioRepository usuariorepository) {
-        this.usuariorepository = usuariorepository;
-    }
-   
-    
+
     @Override
     public Usuario save(Usuario usuario) {
-        return usuariorepository.save(usuario);
+        return usuarioRepository.save(usuario);
     }
 
     @Override
     public List<Usuario> findAll() {
-        return usuariorepository.findAll();
+        return usuarioRepository.findAll();
     }
 
     @Override
     public Usuario findById(String id) {
-        Usuario usuario = usuariorepository.findById(id).orElseThrow(
-            () ->{
-                throw new ResourceNotFoundException("El usurio con matricula "+id+" no se encuentra");
-            }    
-        );
-        //return usuariorepository.findById(id).get();
-        return usuario;
+        return usuarioRepository.findById(id).orElse(null);
     }
 
     @Override
     public void deleteById(String id) {
-        usuariorepository.deleteById(id);
+        usuarioRepository.deleteById(id);
     }
 
     @Override
     public Usuario update(Usuario usuario) {
-        return usuariorepository.save(usuario);
+        return usuarioRepository.save(usuario);
     }
-    
-    
-    
+
+@Override
+public Usuario findByUsuario(String usuario) {
+    return usuarioRepository.findByUsuario(usuario)
+            .orElse(null); // O lanza una excepción si prefieres
+}
+
+
     
 }

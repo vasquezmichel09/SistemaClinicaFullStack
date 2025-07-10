@@ -1,0 +1,46 @@
+.admin-panel {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: var(--azul);
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.nav-pills .nav-link.active {
+  background-color: var(--azul);
+}
+
+.table thead {
+  background-color: var(--gris);
+}
+
+.btn-accion {
+  margin-right: 5px;
+  font-size: 0.85rem;
+}
+
+.btn-agregar {
+  background-color: var(--azul);
+  color: white;
+}
+.btn-azul-elegante {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.search-bar {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .table-responsive {
+    overflow-x: auto;
+  }
+}

@@ -1,0 +1,75 @@
+   body {
+      background: linear-gradient(to bottom right, var(--azul-odontologia), #e3efff);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .card-login {
+      background-color: var(--blanco);
+      border: none;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      padding: 2rem;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .card-login h4 {
+      color: var(--azul-odontologia);
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+    }
+
+    .form-label {
+      color: #333;
+      font-weight: 500;
+    }
+
+    .form-control {
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      transition: all 0.3s;
+    }
+
+    .form-control:focus {
+      border-color: var(--azul-odontologia);
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .btn-login {
+      background-color: var(--azul-odontologia);
+      color: white;
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .btn-login:hover {
+      background-color: #0056b3;
+    }
+
+    .footer-text {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    @media (max-width: 576px) {
+      .card-login {
+        padding: 1.5rem;
+      }
+    }
+
+     .card-login {
+    max-width: 400px;
+    margin: auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }

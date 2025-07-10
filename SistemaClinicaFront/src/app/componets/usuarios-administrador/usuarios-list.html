@@ -1,0 +1,302 @@
+<div class="d-flex justify-content-end align-items-center bg-light px-4 py-2 border-bottom shadow-sm"
+  style="position: sticky; top: 0; z-index: 1000;">
+  <span class="me-3 fw-semibold text-primary">
+    👋 Bienvenido, {{ nombreUsuarioLogueado }}
+  </span>
+
+  <!-- Botón de regresar al menú -->
+  <button class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1 me-2" (click)="volverAlMenu()">
+    <i class="bi bi-arrow-left-circle"></i> Menú
+  </button>
+
+  <!-- Botón de cerrar sesión -->
+  <button class="btn btn-outline-danger btn-sm d-flex align-items-center gap-1" (click)="logout()">
+    <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+  </button>
+</div>
+
+
+
+
+<div class="admin-panel">
+
+  <h2 class="text-center">Panel de Administración</h2>
+
+  <ul class="nav nav-pills mb-4 justify-content-center" id="adminTab" role="tablist">
+    <li class="nav-item"><button class="nav-link active" id="historias-tab" data-bs-toggle="pill"
+        data-bs-target="#historias" type="button">📋 Historias Clínicas</button></li>
+    <li class="nav-item"><button class="nav-link" id="estudiantes-tab" data-bs-toggle="pill"
+        data-bs-target="#estudiantes" type="button" (click)="abrirEstudiantes()">👩‍🎓 Estudiantes</button></li>
+    <li class="nav-item"><button class="nav-link" id="periodo-tab" data-bs-toggle="pill" data-bs-target="#periodos"
+        type="button">📆Periodo</button></li>
+  </ul>
+
+  <div class="tab-content" id="adminTabContent">
+
+    <!-- Historias clínicas -->
+    <div class="tab-pane fade show active" id="historias" role="tabpanel">
+      <input type="text" id="buscadorHistorias" class="form-control search-bar"
+        placeholder="Buscar por matrícula, nombre o fecha">
+
+      <ul class="nav nav-tabs mb-3" id="historiaTabs" role="tablist">
+        <li class="nav-item">
+          <button class="nav-link active" id="todas-tab" data-bs-toggle="tab" data-bs-target="#todas" type="button">📋
+            Todas</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" id="revision-tab" data-bs-toggle="tab" data-bs-target="#revision" type="button">🕐 En
+            Revisión</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" id="aprobadas-tab" data-bs-toggle="tab" data-bs-target="#aprobadas" type="button">✅
+            Aprobadas</button>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <!-- Todas -->
+        <div class="tab-pane fade show active" id="todas">
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle" id="tablaHistorias">
+              <thead>
+                <tr>
+                  <th>Matrícula</th>
+                  <th>Estudiante</th>
+                  <th>Paciente</th>
+                  <th>Tipo de Historia</th>
+                  <th>Estado</th>
+                  <th>Fecha</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2023001</td>
+                  <td>Juan Pérez</td>
+                  <td>Carlos Pérez</td>
+                  <td>Ortodoncia</td>
+                  <td>En Revisión</td>
+                  <td>2025-06-01</td>
+                  <td>
+                    <button class="btn btn-success btn-sm btn-accion">✔️ Aprobar</button>
+                    <button class="btn btn-danger btn-sm btn-accion">❌ Rechazar</button>
+                    <button class="btn btn-primary btn-sm btn-accion">🔍 Ver</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2023002</td>
+                  <td>María López</td>
+                  <td>MIguel Angel</td>
+                  <td>Endodoncia</td>
+                  <td>Aprobada</td>
+                  <td>2025-06-02</td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm btn-accion" disabled>✔️ Aprobada</button>
+                    <button class="btn btn-primary btn-sm btn-accion">🔍 Ver</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- En Revisión -->
+        <div class="tab-pane fade" id="revision">
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+              <thead>
+                <tr>
+                  <th>Matrícula</th>
+                  <th>Estudiante</th>
+                  <th>Paciente</th>
+                  <th>Tipo de Historia</th>
+                  <th>Fecha</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2023001</td>
+                  <td>Juan Pérez</td>
+                  <td>Juan Daniel</td>
+                  <td>Ortodoncia</td>
+                  <td>2025-06-01</td>
+                  <td>
+                    <button class="btn btn-success btn-sm btn-accion">✔️ Aprobar</button>
+                    <button class="btn btn-danger btn-sm btn-accion">❌ Rechazar</button>
+                    <button class="btn btn-primary btn-sm btn-accion">🔍 Ver</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Aprobadas -->
+        <div class="tab-pane fade" id="aprobadas">
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+              <thead>
+                <tr>
+                  <th>Matrícula</th>
+                  <th>Estudiante</th>
+                  <th>Paciente</th>
+                  <th>Tipo de Historia</th>
+                  <th>Fecha</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2023002</td>
+                  <td>María López</td>
+                  <td>Jimena López</td>
+                  <td>Endodoncia</td>
+                  <td>2025-06-02</td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm btn-accion" disabled>✔️ Aprobada</button>
+                    <button class="btn btn-primary btn-sm btn-accion">🔍 Ver</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Estudiantes -->
+    <div class="tab-pane fade" id="estudiantes" role="tabpanel">
+      <form (ngSubmit)="modoEdicion ? actualizarUsuario() : addUsuario()">
+        <div class="row g-3">
+
+          <div class="col-md-6 col-lg-4">
+            <label for="nombreUsuario" class="form-label">Nombre del Estudiante</label>
+            <input [(ngModel)]="nombreUsuario" name="nombreUsuario" id="nombreUsuario" class="form-control"
+              placeholder="Ingrese el nombre completo del estudiante" required />
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <label for="matricula" class="form-label">Matrícula</label>
+            <input [(ngModel)]="matricula" name="matricula" id="matricula" class="form-control"
+              placeholder="Ingrese la matricula del estudiante" required />
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <label for="usuario" class="form-label">Usuario</label>
+            <input [(ngModel)]="usuario" name="usuario" id="usuario" class="form-control"
+              placeholder="Ingrese el nombre de usuario del estudiante" required />
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <label for="contrasena" class="form-label">Contraseña</label>
+            <input [(ngModel)]="contrasena" name="contrasena" id="contrasena" class="form-control" type="password"
+              placeholder="********" required />
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <label for="periodo" class="form-label">Período</label>
+            <select [(ngModel)]="periodo" name="periodo" id="periodo" class="form-select" required>
+              <option value="" disabled selected>Selecciona un período</option>
+              <option *ngFor="let p of periodos" [value]="p.periodo">{{ p.periodo }}</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="mt-4 text-end">
+          <button *ngIf="!modoEdicion" type="submit" class="btn btn-primary me-2">
+            ➕ Agregar Estudiante
+          </button>
+          <button *ngIf="modoEdicion" type="submit" class="btn btn-success me-2">
+            💾 Guardar Cambios
+          </button>
+          <button type="button" class="btn btn-outline-secondary me-2" (click)="resetForm()">
+            🧹 Limpiar
+          </button>
+        </div>
+      </form>
+
+      <div class="table-responsive mt-4">
+        <input type="text" class="form-control mb-3" placeholder="Buscar estudiante..." [(ngModel)]="filtroEstudiantes">
+
+        <table class="table table-bordered">
+          <thead class="table-primary">
+            <tr>
+              <th>Matrícula</th>
+              <th>Nombre</th>
+              <th>Usuario</th>
+              <th>Contraseña</th>
+              <th>Período</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Us of usuariosFiltrados()">
+              <td>{{ Us.matricula }}</td>
+              <td>{{ Us.nombreUsuario }}</td>
+              <td>{{ Us.usuario }}</td>
+              <td>{{ Us.contrasena }}</td>
+              <td>{{ Us.periodo }}</td>
+              <td>
+                <button type="button" class="btn btn-warning btn-sm" (click)="editarUsuario(Us)">
+                  ✏️ Editar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Periodo -->
+<div class="tab-pane fade" id="periodos">
+  <div class="container mt-4">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h4 class="card-title mb-4">📆 Agregar Período Académico</h4>
+
+        <form (ngSubmit)="modoEdicionPeriodo ? actualizarPeriodo() : guardarPeriodo()" #formPeriodo="ngForm">
+          <div class="mb-3">
+            <label for="periodoInput" class="form-label fw-semibold">Nombre del Período</label>
+            <input type="text" id="periodoInput" name="periodo" class="form-control" [(ngModel)]="periodo" required
+              placeholder="Ej: Agosto 2024 - Febrero 2025" />
+          </div>
+
+          <div class="d-flex flex-wrap gap-2">
+            <button type="submit" class="btn btn-success" *ngIf="!modoEdicionPeriodo">
+              📥 Guardar
+            </button>
+            <button type="submit" class="btn btn-warning" *ngIf="modoEdicionPeriodo">
+              ✏️ Actualizar
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="cancelarEdicionPeriodo()"
+              *ngIf="modoEdicionPeriodo">
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="card shadow-sm border-0 mt-4">
+      <div class="card-body">
+        <h5 class="card-title mb-3">📋 Períodos Registrados</h5>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let p of periodos">
+            <span>{{ p.periodo }}</span>
+            <button class="btn btn-sm btn-outline-primary" (click)="editarPeriodo(p)">
+              ✏️ Editar
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
